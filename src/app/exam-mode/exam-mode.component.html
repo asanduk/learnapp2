@@ -1,0 +1,97 @@
+<div class="container" *ngIf="!showQuizResults && !bittidegeri ">
+  
+  <button class="toggle-button" (click)="toggleSettings()">Exam Settings</button>
+
+  <div class="settings-container" *ngIf="showSettings">
+    <h2>Exam Settings</h2>
+    <div class="form-field">
+      <label for="questionCount">Question Count</label>
+      <input type="number" id="questionCount" [(ngModel)]="selectedQuestionCount">
+    </div>
+    <div class="form-field">
+      <label for="questionType">Question Type</label>
+      <select id="questionType" [(ngModel)]="selectedQuestionType">
+        <option value="all">All</option>
+        <option value="mc">Multiple Choice</option>
+        <option value="sc">Single Choice</option>
+        <option value="fi">Fill in</option>
+      </select>
+    </div>
+    <button class="apply-button" (click)="applySettingsWithDelay()">Apply Settings</button>
+  </div>
+  
+  <div class="alert" *ngIf="showConfirmation">
+    Settings applied! The exam will restart in 3 seconds.
+  </div>
+
+
+  <h1>Exam Mode</h1>
+
+  <div *ngIf="questions.length > 0 && currentQuestionIndex < questions.length">
+
+    <div class="question-container">
+      <h3 *ngIf="selectedQuestionCount">Question {{ currentQuestionIndex + 1 }} / {{selectedQuestionCount}}</h3>
+      <h3 *ngIf="questions && !selectedQuestionCount">Question {{ currentQuestionIndex + 1 }} / 120</h3>
+
+      <p class="question-text">{{ questions[currentQuestionIndex].qtxt.join('\n') }}</p>
+      <ng-container *ngFor="let answer of questions[currentQuestionIndex].qanswers; let i = index">
+        <ng-container *ngIf="questions[currentQuestionIndex].qtyp !== 'fi'; else fillInInput">
+          <div class="answer-option">
+            <label>
+              <input [type]="getInputType(questions[currentQuestionIndex].qtyp)"
+                     [name]="'answer-' + currentQuestionIndex"
+                     [value]="getCharCode(i)"
+                     [checked]="isAnswerSelected(getCharCode(i))"
+                     (change)="toggleAnswer(getCharCode(i), questions[currentQuestionIndex].qtyp)">
+              {{ answer.txt.join('\n') }}
+            </label>
+          </div>
+        </ng-container>
+        <ng-template #fillInInput>
+          <div class="answer-option">
+            <input *ngIf="!showResult || fillInAnswer" type="text" [(ngModel)]="fillInAnswer" placeholder="Type your answer...">
+          </div>
+        </ng-template>
+      </ng-container>
+      <div class="button-container">
+        <button (click)="moveToPreviousQuestion()" [disabled]="currentQuestionIndex === 0"><i class="fas fa-chevron-left"></i> Back</button>
+        
+        <button [disabled]="currentQuestionIndex + 1 === selectedQuestionCount"
+        (click)="nextQuestionAndBitti();"
+        [innerHTML]="currentQuestionIndex + 1 === selectedQuestionCount ? 'End' : 'Next'">
+        <i class="fas fa-arrow-right"></i>
+        </button>
+        <button (click)="finishExam()">Complete Exam</button>
+
+      </div>
+      
+    </div>
+
+
+  </div>
+  
+  
+</div>
+
+
+<div *ngIf="bittidegeri" class="warning-message">
+  <p>You have answered incorrectly 20% of the questions. It's recommended to switch to Learn Mode or Check Mode.</p>
+  <button routerLink="/learn" class="link-button">Learn Mode</button>
+  <button routerLink="/check" class="link-button">Check Mode</button>
+  <div class="statistics">
+    <h3>Quiz Statistics</h3>
+    <p>Correct Answers: {{ correctCount }}</p>
+    <p>Incorrect Answers: {{ incorrectCount }}</p>
+    <p>Skipped Questions: {{ skippedCount }}</p>
+  </div>
+</div>
+<div *ngIf="showQuizResults" class="finish-message">
+  <div class="statistics">
+    <h3>Quiz Statistics</h3>
+    <p>Correct Answers: {{ correctCount }}</p>
+    <p>Incorrect Answers: {{ incorrectCount }}</p>
+    <p>Skipped Questions: {{ skippedCount }}</p>
+  </div>
+</div>
+
+

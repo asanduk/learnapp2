@@ -1,0 +1,150 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.warning-message {
+  background-color: #ffdbdb;
+  border: 1px solid #ff7b7b;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.finish-message {
+  background-color: #a1eeb4;
+  border: 1px solid #94fcb7;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+
+.warning-message p {
+  margin: 0;
+}
+
+.link-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 16px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.link-button:hover {
+  background-color: #0056b3;
+}
+
+
+.question-container {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.question-text {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.answer-option {
+  margin-bottom: 10px;
+}
+
+
+.result-box {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.correct-message, .incorrect-message {
+  font-weight: bold;
+}
+
+.correct-message {
+  color: green;
+}
+
+.incorrect-message {
+  color: red;
+}
+
+
+.statistics {
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+.answer-required {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.button-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 16px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button-container button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .question-container {
+    padding: 10px;
+  }
+  
+  
+ 
+
+}
+

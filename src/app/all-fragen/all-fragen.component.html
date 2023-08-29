@@ -1,0 +1,17 @@
+<div class="all-fragen-container">
+  <h1>All Questions</h1>
+  <ul class="question-list">
+    <li *ngFor="let question of questions; let qIndex = index" class="question-item">
+      <div class="question-box">
+        <p class="question-title">{{ question.qtxt.join('\n') }}</p>
+        <ul class="answer-list">
+          <li *ngFor="let answer of question.qanswers; let aIndex = index"
+              [ngClass]="{ 'correct-answer': answer.correct && question.showCorrectAnswers }">
+            {{ answer.txt[0] }}
+          </li>
+        </ul>
+        <button class="show-answer-button" (click)="showAnswer(question)">Show Answer</button>
+      </div>
+    </li>
+  </ul>
+</div>

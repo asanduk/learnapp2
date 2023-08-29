@@ -1,0 +1,35 @@
+<h1>Learn Mode</h1>
+
+<div *ngIf="questions.length > 0" class="learn-mode-container">
+  <h1 class="question">{{ questions[currentQuestionIndex].qtxt.join('\n') }}</h1>
+  <ul class="answer-list">
+    <li
+      class="answer-item"
+      *ngFor="let answer of questions[currentQuestionIndex].qanswers; let i = index"
+      [ngClass]="{ 'correct-answer': answer.correct && showCorrectAnswers }"
+    >
+      {{ answer.txt[0] }}
+    </li>
+  </ul>
+  <button
+    class="show-answer-button"
+    (click)="showAnswer()"
+  >
+    Show Answer
+  </button>
+  <button
+    class="back-button"
+    [disabled]="currentQuestionIndex === 0"
+    (click)="showPreviousQuestion()"
+  >
+    Back
+  </button>
+  <button
+    class="next-button"
+    (click)="showNextQuestion()"
+  >
+    Next
+  </button>
+</div>
+
+<button routerLink="/alle-fragen" class="link-button">All Questions</button>
